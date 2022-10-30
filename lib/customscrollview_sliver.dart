@@ -18,7 +18,7 @@ class MyCustomScrollView extends StatelessWidget {
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,
-            title: Text(
+            title: const Text(
               "Sinem ALAGÖZ",
               style: TextStyle(color: Colors.amber),
             ),
@@ -29,10 +29,7 @@ class MyCustomScrollView extends StatelessWidget {
           ),
         ),
 
-        // SliverList(delegate: SliverChildListDelegate(
-        //   sabitListeElemanlari
-        // )
-        // ),
+        SliverList(delegate: SliverChildListDelegate(sabitListeElemanlari)),
 
         SliverPadding(
           padding: EdgeInsets.all(10),
@@ -41,6 +38,28 @@ class MyCustomScrollView extends StatelessWidget {
                   childCount: sabitListeElemanlari.length)),
         ),
 
+        SliverGrid(
+            delegate: SliverChildListDelegate(sabitListeElemanlari),
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3)),
+
+        SliverGrid(
+            delegate: SliverChildBuilderDelegate(_dinamikListeElemanlari,
+                childCount: sabitListeElemanlari.length),
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2)),
+
+        SliverGrid(
+            delegate: SliverChildBuilderDelegate(_dinamikListeElemanlari,
+                childCount: sabitListeElemanlari.length),
+            gridDelegate:
+                SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 100)
+                ),
+        SliverGrid.count(crossAxisCount: 3, children: sabitListeElemanlari,),
+
+        SliverGrid.extent(maxCrossAxisExtent: 300, children: sabitListeElemanlari,),
+
+      
         //  SliverGrid.count(crossAxisCount: 2),
         //SliverGrid.extent(maxCrossAxisExtent: 100)
         //  SliverGrid(delegate: delegate, gridDelegate: gridDelegate)
@@ -80,7 +99,7 @@ class MyCustomScrollView extends StatelessWidget {
   Widget _dinamikListeElemanlari(BuildContext context, int index) {
     // return sabitListeElemanlari[index];
 
-   return Container(
+    return Container(
       height: 150,
       color: colorUret(),
       alignment: Alignment.center,
